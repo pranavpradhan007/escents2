@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import NavBar from "./Components/NavBar";
+import React, { Component } from "react";
+import Products from "./Components/Products";
+import Home from "./Components/Home";
+import Feedback from "./Components/Feedback";
+import Cart from "./Components/Cart";
+import Itemdetails from "./Components/Itemdetails";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Loading from "./Components/Loading";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  render() {
+    return (
+      <>
+        <Router>
+          <NavBar fixed="top" />
+          <Routes>
+            <Route exact path="/products" element={<Products />}></Route>
+            <Route exact path="/home" element={<Home />}></Route>
+            <Route exact path="/cart" element={<Cart />}></Route>
+            <Route exact path="/feedback" element={<Feedback />}></Route>
+            <Route exact path="/itemdetails" element={<Itemdetails />}></Route>
+            <Route exact path="/loading" element={<Loading />}></Route>
+          </Routes>
+        </Router>
+      </>
+    );
+  }
 }
-
-export default App;

@@ -5,11 +5,11 @@ import Loading from "./Loading";
 
 export class Item extends Component {
   render() {
-    let {title , description, imageurl}=this.props;
+    let {title , description, imageurl , id}=this.props;
     return (
       <div className="my-3">
         <div className="card" style={{width: "18rem"}}>
-          <Link className="" to="/itemdetails">
+          <Link className="" to="/itemdetails/">
           <img src={imageurl} className="card-img-top" alt="..." />
           </Link>
           <div className="card-body">
@@ -17,9 +17,11 @@ export class Item extends Component {
             <p className="card-text">
               {description}
             </p>
-            <Link to="/loading" className="btn btn-sm btn-secondary">
+            <div className="btn btn-sm btn-secondary"
+            onClick={()=>(window.location.href=`/itemdetails/${id}`)}
+            >
               Buy Now
-            </Link>
+            </div>
           </div>
           
         </div>

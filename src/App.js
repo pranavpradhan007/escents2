@@ -17,10 +17,10 @@ export default class App extends Component {
           <NavBar fixed="top" />
           <Routes>
             <Route exact path="/products" element={<Products />}></Route>
-            <Route exact path="/home" element={<Home />}></Route>
+            <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/cart" element={<Cart />}></Route>
             <Route exact path="/feedback" element={<Feedback />}></Route>
-            <Route exact path="/itemdetails" element={<Itemdetails />}></Route>
+            <Route exact path="/itemdetails/:id" element={<Itemdetails />}></Route>
             <Route exact path="/loading" element={<Loading />}></Route>
           </Routes>
         </Router>

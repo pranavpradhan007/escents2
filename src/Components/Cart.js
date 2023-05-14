@@ -48,7 +48,7 @@ export default function Cart() {
             <h3>
               <strong>Product Price: </strong>
             </h3>
-            <h4>{item.totalPrice}</h4>
+            <h4>{item.totalPrice}/-</h4>
           </div>
         ))}
         {cart.length > 0 && (

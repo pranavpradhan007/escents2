@@ -6,8 +6,9 @@ import Home from "./Components/Home";
 import Feedback from "./Components/Feedback";
 import Cart from "./Components/Cart";
 import Itemdetails from "./Components/Itemdetails";
+import Checkout from "./Components/Checkout";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Loading from "./Components/Loading";
+
 
 export default class App extends Component {
   render() {
@@ -21,7 +22,8 @@ export default class App extends Component {
             <Route exact path="/cart" element={<Cart />}></Route>
             <Route exact path="/feedback" element={<Feedback />}></Route>
             <Route exact path="/itemdetails/:id" element={<Itemdetails />}></Route>
-            <Route exact path="/loading" element={<Loading />}></Route>
+            <Route exact path="/checkout" element={<Checkout />}></Route>
+          
           </Routes>
         </Router>
       </>

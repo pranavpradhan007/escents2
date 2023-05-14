@@ -23,7 +23,6 @@ export default class App extends Component {
             <Route exact path="/feedback" element={<Feedback />}></Route>
             <Route exact path="/itemdetails/:id" element={<Itemdetails />}></Route>
             <Route exact path="/checkout" element={<Checkout />}></Route>
-          
           </Routes>
         </Router>
       </>

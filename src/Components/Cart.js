@@ -7,8 +7,14 @@ export default function Cart() {
   const getCart = () => {
     const data = JSON.parse(localStorage.getItem("cart"));
     if (data) {
-      console.log(data);
-      setCart(data);
+      const updatedCart = data.map((item) => {
+        return {
+          ...item,
+          totalPrice: item.price * item.quantity
+        };
+      });
+      console.log(updatedCart);
+      setCart(updatedCart);
     } else {
       console.log("no data");
     }
@@ -42,12 +48,12 @@ export default function Cart() {
             <h3>
               <strong>Product Price: </strong>
             </h3>
-            <h4>{item.price}</h4>
+            <h4>{item.totalPrice}</h4>
           </div>
         ))}
         {cart.length > 0 && (
           <div className="container my-4 d-flex justify-content-center">
-            <button type="button" className="btn btn-danger btn-lg me-3" onClick={clearCart}>
+            <button type="button" className="btn btn-outline-danger btn-lg me-3" onClick={clearCart}>
               Clear Cart
             </button>
             <Link to="/checkout">

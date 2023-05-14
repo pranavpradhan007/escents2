@@ -57,7 +57,7 @@ export default function Cart() {
               Clear Cart
             </button>
             <Link to="/checkout">
-              <button type="button" className="btn btn-dark btn-lg">
+              <button type="button" className="btn btn-dark btn-lg" onClick={clearCart}>
                 Proceed to Checkout
               </button>
             </Link>

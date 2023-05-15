@@ -44,7 +44,7 @@ routes.post('/razorpay', async (req, res) => {
         const currency = 'INR';
 
         const options = {
-            amount: 500 * 100,
+            amount: 348 * 100,
             currency,
             //generate order id
             receipt: "receipt#1" ,

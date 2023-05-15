@@ -1,10 +1,93 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const navigate = useNavigate();
+  function loadScript(src) {
+    return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => {
+            resolve(true);
+        };
+        script.onerror = () => {
+            resolve(false);
+        };
+        document.body.appendChild(script);
+    });
+}
+
+  const displayRazorpay = async()=> {
+
+    const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        return;
+    }
+
+    // creating a new order
+    const result = await fetch("/razorpay", {
+        method: "POST",
+    });
+
+    const data = await result.json();
+    if (!data) {
+        alert("Server error. Are you online?");
+        return;
+    }
+
+    // Getting the order details back
+    const { amount, id: order_id, currency } = data;
+
+    const options = {
+        key: "rzp_test_regQ3Jwb1ZlLrU", // Enter the Key ID generated from the Dashboard
+        amount: amount.toString(),
+        currency: currency,
+        name: "Escents",
+        description: "Test Transaction",
+        order_id: order_id,
+        handler: async function (response) {
+            const data = {
+                orderCreationId: order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpaySignature: response.razorpay_signature,
+            };
+
+            const result = await fetch("/success", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            const res = await result.json();
+            alert("Payment successful");
+            navigate("/");
+        },
+        prefill: {
+            name: "Pranav",
+            email: "pranav@gmail.com",
+            contact: "9822790187",
+        },
+        notes: {
+            address: "Escents , Pune",
+        },
+        theme: {
+            color: "#61dafb",
+        },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+}
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,7 +165,7 @@ export default function Checkout() {
                 required
               />
             </div>
-            <button type="submit" className="btn btn-secondary">
+            <button onClick={() => displayRazorpay()} type="submit" className="btn btn-secondary">
               Place Order
             </button>
           </form>

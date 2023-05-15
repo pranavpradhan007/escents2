@@ -31,6 +31,8 @@ export default class Feedback extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state);
+    alert("Thank you for your feedback");
+    
   };
 
   render() {

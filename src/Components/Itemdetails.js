@@ -75,7 +75,7 @@ export default function Itemdetails() {
                 body: JSON.stringify(data),
             });
             const res = await result.json();
-            alert("Thank you for donating a very generous amount.");
+            alert("Payment successful");
             navigate("/");
         },
         prefill: {
